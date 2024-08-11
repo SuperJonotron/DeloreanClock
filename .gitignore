@@ -23,10 +23,15 @@
 # Compiled Static libraries
 *.lai
 *.la
-*.a
 *.lib
 
 # Executables
 *.exe
 *.out
 *.app
+
+# Compiled output files
+/out
+
+# config.h files
+*config.h
