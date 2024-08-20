@@ -56,6 +56,46 @@ enum Mode{
   demo
 };
 
+enum LEDColor{
+    red,
+    green,
+    yellow
+};
+
+#if defined(ESP8266)
+    //ToDo:  Figure out what pins I should use for esp8266
+    // use zero just as a place holder for compiling
+    //define the pins for the AM/PM LEDs
+    const byte PIN_YELLOW_AM = 0;
+    const byte PIN_YELLOW_PM = 0;
+    const byte PIN_GREEN_AM = 0;
+    const byte PIN_GREEN_PM = 0;
+    const byte PIN_RED_AM = 0;
+    const byte PIN_RED_PM = 0;
+
+#elif defined(ESP32) //This pinout is not confirmed just placed here to compile
+
+    //ToDo:  Figure out what pins I should use for esp32
+    // use zero just as a place holder for compiling
+    //define the pins for the AM/PM LEDs
+    const byte PIN_YELLOW_AM = 0;
+    const byte PIN_YELLOW_PM = 0;
+    const byte PIN_GREEN_AM = 0;
+    const byte PIN_GREEN_PM = 0;
+    const byte PIN_RED_AM = 0;
+    const byte PIN_RED_PM = 0;
+
+#elif defined(ARDUINO_ARCH_MBED_RP2040) || defined(ARDUINO_ARCH_RP2040)
+    //define the pins for the AM/PM LEDs
+    const byte PIN_YELLOW_AM = 10;
+    const byte PIN_YELLOW_PM = 11;
+    const byte PIN_GREEN_AM = 12;
+    const byte PIN_GREEN_PM = 13;
+    const byte PIN_RED_AM = 14;
+    const byte PIN_RED_PM = 15;
+
+#endif
+
 
 /**
  * DeloreanClock object used to control the I/O to maintain the time 
@@ -100,6 +140,8 @@ class DeloreanClock{
         void eventMode();
         void defaultMode();
         void nightMode();
+        void initPins();
+        void setLEDs(bool am, bool pm, LEDColor);
         std::vector<time_t> birthdays;
         std::vector<time_t> anniversaries;
     private:
